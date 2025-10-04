@@ -1,10 +1,10 @@
 # streamlit_ui.py
 
 import streamlit as st
-from graph import app
+from graph import agent
 import time
 import uuid
-from langgraph.types import interrupt, Command
+from langgraph.types import Command
 
 thread_id = "122322433"
 config = {"configurable": {"thread_id": thread_id}}
@@ -26,7 +26,7 @@ if st.session_state.state["iteration"] == 0:
     if st.button("Generate Response"):
         st.session_state.state["input"] = user_input
         st.session_state.state["comment"] = ""
-        st.session_state.state = app.invoke(st.session_state.state, config=config)
+        st.session_state.state = agent.invoke(st.session_state.state, config=config)
         print(f"Generated Response: {st.session_state.state['response']}")
 
 if "submitted" not in st.session_state:
@@ -55,7 +55,7 @@ if st.session_state.state["iteration"] > 0:
         st.session_state.submitted = False
         st.session_state.state["review"] = review
         st.session_state.state["comment"] = comment if not st.session_state.state["comment"] else st.session_state.state["comment"] + "\n" + comment
-        st.session_state.state=app.invoke(Command(resume="approve"), config=config) if review == "approve" else app.invoke(Command(resume="reject",update={"comment":st.session_state.state["comment"]}), config=config)
+        st.session_state.state=agent.invoke(Command(resume="approve"), config=config) if review == "approve" else agent.invoke(Command(resume="reject",update={"comment":st.session_state.state["comment"]}), config=config)
         
         print(f"Iteration {st.session_state.state['iteration']}  response: {st.session_state.state['response']}. \nReview status: {st.session_state.state['review']}")
 

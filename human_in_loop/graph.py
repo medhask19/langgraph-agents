@@ -77,4 +77,4 @@ graph.add_edge("rejection_node", END)
 
 
 checkpointer = InMemorySaver()
-app = graph.compile(checkpointer=checkpointer)
+agent = graph.compile(checkpointer=checkpointer)
