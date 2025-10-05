@@ -23,7 +23,7 @@ class ReviewState(TypedDict):
 
 llm = ChatGroq(model="openai/gpt-oss-120b")
 
-def generate_response(state: ReviewState) -> ReviewState:
+def llm_response(state: ReviewState) -> ReviewState:
     prompt = state["input"]
     comment=""
     if state["comment"]:
@@ -64,7 +64,7 @@ def approve(state: ReviewState) -> ReviewState:
 
 # Build the graph
 graph = StateGraph(ReviewState)
-graph.add_node("llm_response", generate_response)
+graph.add_node("llm_response", llm_response)
 graph.add_node("human_review", human_review)
 graph.add_node("rejection_node", final_rejection)
 graph.add_node("approval_node", approve)

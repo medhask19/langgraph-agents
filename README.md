@@ -12,9 +12,14 @@ AI Agents using langgraph framework
     - `cd langgraph-agents`
 5. Run command: `uv sync` (This will create python virtual environment & install all packages from pyproject.toml)
 
-## human_in_loop agent
+## 1_simple_agent agent
 
-1. A simple agent using langgraph's human-in-the-loop workflow is available at /human_in_loop/
+1. A simple langraph agent with a single `llm_response` node is available /1_simple_agent/
+2. Command to run this agent: `uv run .\1_simple_agent\graph.py`
+
+## 2_human_in_loop agent
+
+1. An agent using langgraph's human-in-the-loop workflow is available at /human_in_loop/
 2. Run this agent by launching streamlit web interface: `uv run streamlit run human_in_loop/streamlit_ui.py`
 
 ## Additional notes
