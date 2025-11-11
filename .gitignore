@@ -1,3 +1,7 @@
 .env
 .venv/
-human_in_loop/__pycache__/
+1_simple_agent/__pycache__/
+2_human_in_loop/__pycache__/
+3_agent_for_sql/__pycache__/
+3_agent_for_sql/sales.db
+

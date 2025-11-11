@@ -19,8 +19,18 @@ AI Agents using langgraph framework
 
 ## 2_human_in_loop agent
 
-1. An agent using langgraph's human-in-the-loop workflow is available at /human_in_loop/
-2. Run this agent by launching streamlit web interface: `uv run streamlit run human_in_loop/streamlit_ui.py`
+1. An agent using langgraph's human-in-the-loop workflow is available at /2_human_in_loop/
+2. Run this agent by launching streamlit web interface: `uv run streamlit run 2_human_in_loop/streamlit_ui.py`
+
+## 3_agent_for_sql
+
+1. An agent which converts user's natural language query into SQL and then runs that SQL query on SQLlite database table to get query result is available at /3_agent_for_sql
+
+2. How to run this agent?
+    - `cd 3_agent_for_sql`
+    - Load SQLLite sales table from csv: `uv run load_db.py`
+    - Invoke langgraph agent WITHOUT tools to query SQL sales table in natural language:  `uv run graph.py`
+    - Invoke langgraph agent WITH tools to query SQL sales table in natural language:  `uv run graph_with_tools.py`
 
 ## Additional notes
 

@@ -6,7 +6,7 @@ import time
 import uuid
 from langgraph.types import Command
 
-thread_id = "122322433"
+thread_id = "user-123"  # In a real app, this would be dynamic per user/session
 config = {"configurable": {"thread_id": thread_id}}
 
 st.title("Human-in-the-Loop Review System")
@@ -55,7 +55,10 @@ if st.session_state.state["iteration"] > 0:
         st.session_state.submitted = False
         st.session_state.state["review"] = review
         st.session_state.state["comment"] = comment if not st.session_state.state["comment"] else st.session_state.state["comment"] + "\n" + comment
-        st.session_state.state=agent.invoke(Command(resume="approve"), config=config) if review == "approve" else agent.invoke(Command(resume="reject",update={"comment":st.session_state.state["comment"]}), config=config)
+        if review == "approve":
+            st.session_state.state=agent.invoke(Command(resume="approve"), config=config)
+        else:
+            st.session_state.state=agent.invoke(Command(resume="reject",update={"comment":st.session_state.state["comment"]}), config=config)
         
         print(f"Iteration {st.session_state.state['iteration']}  response: {st.session_state.state['response']}. \nReview status: {st.session_state.state['review']}")
 

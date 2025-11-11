@@ -45,8 +45,8 @@ def human_review(state: ReviewState) -> Command[Literal["approval_node","llm_res
     decision = interrupt({
         "question": "Do you approve the following output?",
         "response": state["response"]
-    })
-    print(f"Human decision: {decision}")
+    }) # Graph is paused as this line
+    print(f"Human decision: {decision}") # Graph resumes here once app.invoke() is called from UI with Command having resume="approve" or "reject"
     if decision == "approve":
         return Command(goto="approval_node", update={"review": "approve"})
     elif decision == "reject" and state["iteration"] < 3:
